@@ -26,17 +26,24 @@ app.listen(5000, () => {
 //now we make apis
 
 //my first GET method just to see
-/*app.get('/test', (req, res) => {
+app.get('/test', (req, res) => {
     res.send('Server is up and ready to go');
 });
 
 //lets create a new route for our database
 app.get('/products', (req, res) => {
     res.send('Server is up and ready to go PRODUCTS');
-});*/
+});
 
 //lets create a new route for our music database
 
 //MUSIC RELATED
-
 app.use('/api/music', musicRoutes);
+
+//MANGA RELATED
+
+//TRADING CARDS RELATED
+
+// VIDEO GAMES RELATED
+
+

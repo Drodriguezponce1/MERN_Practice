@@ -1,5 +1,5 @@
 import express from 'express';
-import Music from './models/music.model.js';
+import Music from '../models/music.model.js'; // we import the music model so that we can use it in the routes (double dot means go back one folder)
 import mongoose, { mongo } from 'mongoose';
 
 const router = express.Router(); // we reroute the api calls to this router
@@ -7,6 +7,22 @@ const router = express.Router(); // we reroute the api calls to this router
 router.get('/', async (req, res) => {
     try {
         const music = await Music.find({}); // this will return all the music in the database
+        res.status(200).json({success: true, data: music});
+    } catch (error) {
+        console.error("Error in get music: ", error.message);
+        res.status(500).json({success: false, message: "Server error"});
+    }    
+});
+
+router.get('/:id', async (req, res) => {
+    const {id} = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(404).json({success: false, message: "ID not found"});
+    }
+    
+    try {
+        const music = await Music.findById(id); // this will return the music with the specified ID
         res.status(200).json({success: true, data: music});
     } catch (error) {
         console.error("Error in get music: ", error.message);
