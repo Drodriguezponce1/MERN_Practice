@@ -4,7 +4,12 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
 
+//importing routes
 import musicRoutes from './routes/music.route.js';
+import mangaRoutes from './routes/manga.route.js';
+import tradingCardRoutes from './routes/tradingcards.route.js';
+import videoGameRoutes from './routes/videogames.route.js';
+
 //setups
 
 dotenv.config(); // this will load the .env file and make the variables available to the process.env object
@@ -41,9 +46,11 @@ app.get('/products', (req, res) => {
 app.use('/api/music', musicRoutes);
 
 //MANGA RELATED
+app.use('/api/manga', mangaRoutes);
 
 //TRADING CARDS RELATED
+app.use('/api/tradingcard', tradingCardRoutes);
 
 // VIDEO GAMES RELATED
-
+app.use('/api/videogame', videoGameRoutes);
 

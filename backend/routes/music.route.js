@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)) {
         res.status(404).json({success: false, message: "ID not found"});
     }
-    
+
     try {
         const music = await Music.findById(id); // this will return the music with the specified ID
         res.status(200).json({success: true, data: music});
@@ -42,7 +42,6 @@ router.post('/', async (req, res) => {
     try {
         await newMusic.save();
 
-        newMusic.
         res.status(201).json({success: true, data: newMusic});
     } catch (error) {
 
