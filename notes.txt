@@ -12,3 +12,7 @@ Node - a runtime environment that allows JavaScript to be executed on the server
 
 2) installed a package called nodemon
     - this allows for me to not keep on turning off then on the server 
+
+3) SQL vs MongoDB
+    - tables vs collections
+        - SQL based languages use tables while collections use BSON (key:value)
