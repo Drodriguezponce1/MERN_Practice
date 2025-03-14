@@ -1,4 +1,14 @@
-Notes taken from resources:
+Notes taken from resources (this may have grammer errors):
+
+FOR EVERY TIME I RUN THIS PROJECT USE "npm run one"
 
 1) npm install express mongoose dotenv was used
     * NPM is a javascript package manager
+
+MongoDB - Database
+Express - JS web app framework (where we make the APIs)
+React - front end
+Node - a runtime environment that allows JavaScript to be executed on the server side
+
+2) installed a package called nodemon
+    - this allows for me to not keep on turning off then on the server 
