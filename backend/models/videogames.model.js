@@ -34,6 +34,6 @@ const videogameSchema = new mongoose.Schema({
     timestamps: true // this will automatically create a timestamp for when the document was created and last updated
 });
 
-const VideoGame = mongoose.model('VideoGame', videogamesSchema);
+const VideoGame = mongoose.model('VideoGame', videogameSchema);
 
 export default VideoGame;

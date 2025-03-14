@@ -1,15 +1,15 @@
 import express from 'express';
-import Manga from '../models/manga.model.js'; // we import the music model so that we can use it in the routes (double dot means go back one folder)
+import VideoGame from '../models/videogames.model.js'; // we import the music model so that we can use it in the routes (double dot means go back one folder)
 import mongoose, { mongo } from 'mongoose';
 
 const router = express.Router(); // we reroute the api calls to this router
 
 router.get('/', async (req, res) => {
     try {
-        const manga = await Manga.find({}); // this will return all the music in the database
-        res.status(200).json({success: true, data: manga});
+        const game = await VideoGame.find({}); // this will return all the music in the database
+        res.status(200).json({success: true, data: game});
     } catch (error) {
-        console.error("Error in getting Manga: ", error.message);
+        console.error("Error in getting Game: ", error.message);
         res.status(500).json({success: false, message: "Server error"});
     }    
 });
@@ -22,30 +22,30 @@ router.get('/:id', async (req, res) => {
     }
     
     try {
-        const manga = await Manga.findById(id); // this will return the music with the specified ID
-        res.status(200).json({success: true, data: manga});
+        const game = await VideoGame.findById(id); // this will return the music with the specified ID
+        res.status(200).json({success: true, data: game});
     } catch (error) {
-        console.error("Error in get Manga: ", error.message);
+        console.error("Error in get Game: ", error.message);
         res.status(500).json({success: false, message: "Server error"});
     }    
 });
 
 router.post('/', async (req, res) => {
-    const manga = req.body; // the user provides this body JSON
+    const game = req.body; // the user provides this body JSON
 
-    if(!manga.name || !manga.publisher || !manga.genre || !manga.year || !manga.pages || !manga.price || !manga.image) {
+    if(!game.name || !game.platform || !game.rate || !game.publisher || !game.price || !game.year || !game.image) {
         return res.status(400).json({sucess:false, message: "all fields need to be filled"});
     }
 
-    const newManga = new Manga(manga);
+    const newGame = new VideoGame(game);
 
     try {
-        await newManga.save();
+        await newGame.save();
 
-        res.status(201).json({success: true, data: newManga});
+        res.status(201).json({success: true, data: newGame});
     } catch (error) {
 
-        console.error("Error in create Manga: ", error.message);
+        console.error("Error in create Game: ", error.message);
         res.status(500).json({success: false, message: error.message});
     }
 });
@@ -54,10 +54,10 @@ router.delete('/:id', async (req, res) => {
     const {id} = req.params;
 
     try{
-        await Manga.findByIdAndDelete(id);
-        res.status(200).json({success: true, message: "Manga deleted"}); 
+        await VideoGame.findByIdAndDelete(id);
+        res.status(200).json({success: true, message: "Game deleted"}); 
     } catch (error) {
-        console.error("Error in delete manga: ", error.message);
+        console.error("Error in delete game: ", error.message);
         res.status(404).json({success: false, message: "ID not found"});
     }
 
@@ -67,7 +67,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const {id} = req.params;
 
-    const manga = req.body;
+    const game = req.body;
 
     //this asks the database if there was an object with that id
     if(!mongoose.Types.ObjectId.isValid(id)) {
@@ -75,8 +75,8 @@ router.put('/:id', async (req, res) => {
     }
 
     try {
-       const updatedManga = await Manga.findByIdAndUpdate(id, manga, {new: true});
-       res.status(200).json({success: true, data: updatedManga});  
+       const updatedGame = await VideoGame.findByIdAndUpdate(id, game, {new: true});
+       res.status(200).json({success: true, data: updatedGame});  
     } catch (error) {
         res.status(500).json({success: false, message: "Server Error"});
 
