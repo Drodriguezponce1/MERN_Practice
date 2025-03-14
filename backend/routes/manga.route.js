@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const manga = req.body; // the user provides this body JSON
 
-    if(!manga.name || !manga.publisher || !manga.genre || !manga.year || !manga.pages || !manga.price || !manga.image) {
+    if(!manga.name || !manga.publisher || !manga.genre || !manga.year || !manga.pages || !manga.price || !manga.image || !manga.author) {
         return res.status(400).json({sucess:false, message: "all fields need to be filled"});
     }
 
@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res) => {
 
     try{
         await Manga.findByIdAndDelete(id);
-        res.status(200).json({success: true, message: "Manga deleted"}); 
+        res.status(200).json({success: true, message: "Manga deleted with id: " + id}); 
     } catch (error) {
         console.error("Error in delete manga: ", error.message);
         res.status(404).json({success: false, message: "ID not found"});

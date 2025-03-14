@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res) => {
 
     try{
         await Music.findByIdAndDelete(id);
-        res.status(200).json({success: true, message: "Music deleted"}); 
+        res.status(200).json({success: true, message: "Music deleted with id: " + id}); 
     } catch (error) {
         console.error("Error in delete music: ", error.message);
         res.status(404).json({success: false, message: "ID not found"});
