@@ -35,6 +35,8 @@ app.get('/products', (req, res) => {
 });
 
 //lets create a new route for our music database
+
+//MUSIC RELATED
 app.post('/api/music', async (req, res) => {
     const music = req.body; // the user provides this body JSON
 
@@ -46,11 +48,26 @@ app.post('/api/music', async (req, res) => {
 
     try {
         await newMusic.save();
+
+        newMusic.
         res.status(201).json({success: true, data: newMusic});
     } catch (error) {
 
         console.error("Error in create music: ", error.message);
         res.status(500).json({success: false, message: error.message});
     }
+});
+
+app.delete('/api/music/:id', async (req, res) => {
+    const {id} = req.params;
+
+    try{
+        await Music.findByIdAndDelete(id);
+        res.status(200).json({success: true, message: "Music deleted"}); 
+    } catch (error) {
+        console.error("Error in delete music: ", error.message);
+        res.status(404).json({success: false, message: "ID not found"});
+    }
+
 });
 
