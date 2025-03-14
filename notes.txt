@@ -24,3 +24,5 @@ BACK END
 FRONT END
 4) npm create vite@latest . was used to use a basic template from react
 5) video showed https://chakra-ui.com/
+
+ended day 1 on 1:00:55
