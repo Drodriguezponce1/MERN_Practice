@@ -1,0 +1,4 @@
+Notes taken from resources:
+
+1) npm install express mongoose dotenv was used
+    * NPM is a javascript package manager
