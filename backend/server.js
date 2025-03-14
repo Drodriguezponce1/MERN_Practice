@@ -4,6 +4,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
 import Music from './models/music.model.js';
+import mongoose, { mongo } from 'mongoose';
 
 //setups
 
@@ -37,6 +38,17 @@ app.get('/products', (req, res) => {
 //lets create a new route for our music database
 
 //MUSIC RELATED
+
+app.get('/api/music', async (req, res) => {
+    try {
+        const music = await Music.find({}); // this will return all the music in the database
+        res.status(200).json({success: true, data: music});
+    } catch (error) {
+        console.error("Error in get music: ", error.message);
+        res.status(500).json({success: false, message: "Server error"});
+    }    
+});
+
 app.post('/api/music', async (req, res) => {
     const music = req.body; // the user provides this body JSON
 
@@ -71,3 +83,22 @@ app.delete('/api/music/:id', async (req, res) => {
 
 });
 
+// PUT is used for updating an object
+app.put('/api/music/:id', async (req, res) => {
+    const {id} = req.params;
+
+    const music = req.body;
+
+    //this asks the database if there was an object with that id
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(404).json({success: false, message: "ID not found"});
+    }
+
+    try {
+       const updatedMusic = await Music.findByIdAndUpdate(id, music, {new: true});
+       res.status(200).json({success: true, data: updatedMusic});  
+    } catch (error) {
+        res.status(500).json({success: false, message: "Server Error"});
+
+    }
+});

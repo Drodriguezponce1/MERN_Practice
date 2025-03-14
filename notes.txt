@@ -16,3 +16,5 @@ Node - a runtime environment that allows JavaScript to be executed on the server
 3) SQL vs MongoDB
     - tables vs collections
         - SQL based languages use tables while collections use BSON (key:value)
+
+        4) following the guide, looks like we can "clean" our code by having controllers and routers (I will mainly just do routers for now)
