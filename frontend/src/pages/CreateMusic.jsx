@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, VStack, Heading, Box, useColorModeValue, Input } from "@chakra-ui/react"
+import { Container, VStack, Heading, Box, useColorModeValue, Input, Button } from "@chakra-ui/react"
 
 const CreateMusic = () => {
     const [newMusic, setNewMusic] = useState({
@@ -12,12 +12,16 @@ const CreateMusic = () => {
         image: "",
     });
 
+    const HandleAddMusic = async () => {
+        console.log(newMusic);
+    }
+
     return (
         <Container maxW="container.sm">
             <VStack spacing={8}>
                 <Heading as={"h1"} size={"2xl"} textAlign={"center"} mb={8}>Create Music Resource</Heading>
                
-                <Box w={"full"} bg={useColorModeValue("white", "red.800")} p={6} rounded={"lg"} shadow={"md"}>
+                <Box w={"full"} p={6} rounded={"lg"}>
                     <VStack spacing={4}>
                         <Input
                             placeholder='Name (Ex: Album Name)'
@@ -63,6 +67,8 @@ const CreateMusic = () => {
                             value={newMusic.image}
                             onChange={(e) => setNewMusic({ ...newMusic, image: e.target.value })}
                         /> 
+
+                        <Button colorScheme="yellow" size="lg" onClick={HandleAddMusic}>Create Music Resource</Button>
                     </VStack>
                 </Box>
             </VStack>

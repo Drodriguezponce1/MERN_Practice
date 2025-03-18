@@ -26,3 +26,7 @@ FRONT END
 5) video showed https://chakra-ui.com/
 
 ended day 1 on 1:00:55
+
+Day 2:
+
+I am Doing a ton of new Front-End Tech things including using Chakra, and how that works
