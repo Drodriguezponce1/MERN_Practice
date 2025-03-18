@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 
-import  CreateMusic  from "./pages/CreateMusic";
+import  CreateMusicPage  from "./pages/CreateMusicPage";
 import  HomePage  from "./pages/HomePage";
 import  Navbar  from "./components/Navbar";
 import CreateManga from "./pages/CreateManga";
@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/createMusic" element={<CreateMusic />} />
+        <Route path="/createMusic" element={<CreateMusicPage />} />
         <Route path="/createManga" element={<CreateManga />} />
         <Route path="/createTradingCards" element={<CreateCards />} />
         <Route path="/createVideoGame" element={<CreateVideoGame/>} />

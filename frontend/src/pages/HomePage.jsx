@@ -1,5 +1,5 @@
 import { Container, HStack, Text, VStack, SimpleGrid } from '@chakra-ui/react'
-import { React, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useMusicStore } from "../store/music"
 import { MusicCard } from "../components/MusicCard"
@@ -47,8 +47,12 @@ const HomePage = () => {
         ))}
 
       </SimpleGrid>
-      {music.length === 3 && (
+
+
+      
         <VStack spacing={1} justifyContent={"center"} py={2}>
+
+          {/*{Array.isArray(music) && music.length === 0 && (*/}
           <Text
             fontSize={"25"}
             fontWeight={"bold"}
@@ -56,9 +60,10 @@ const HomePage = () => {
           >
             No Collection was found 😥
           </Text>
-
+          {/*)}*/}
           <Link to={"/createMusic"}>
-            <Text
+          
+          <Text
               as={"span"}
               fontSize={"15"}
               fontWeight={"bold"}
@@ -71,7 +76,8 @@ const HomePage = () => {
           </Link>
 
           <Link to={"/createManga"}>
-            <Text
+        
+          <Text
               as={"span"}
               fontSize={"15"}
               fontWeight={"bold"}
@@ -84,7 +90,7 @@ const HomePage = () => {
           </Link>
 
           <Link to={"/createTradingCards"}>
-            <Text
+          <Text
               as={"span"}
               fontSize={"15"}
               fontWeight={"bold"}
@@ -110,7 +116,7 @@ const HomePage = () => {
           </Link>
 
         </VStack>
-      )}
+      
     </Container>
   )
 }

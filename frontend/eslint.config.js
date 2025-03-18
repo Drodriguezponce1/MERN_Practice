@@ -3,6 +3,8 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
+
+
 export default [
   { ignores: ['dist'] },
   {
@@ -21,7 +23,7 @@ export default [
       'react-refresh': reactRefresh,
     },
     rules: {
-      "react/promp-types": "off",
+      "react/prop-types": "off",
       ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],

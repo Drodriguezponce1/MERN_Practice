@@ -18,7 +18,7 @@ export const useMusicStore = create((set) => ({
 
     const data = await res.json();
 
-    set((state) => ({music: [...state.music, data]}));
+    set((state) => ({music: [...state.music, data.data]}));
 
     return {success: true, message: "Music resource created"};
     
@@ -26,6 +26,21 @@ export const useMusicStore = create((set) => ({
   fetchMusic: async () => {
     const res = await fetch("/api/music");
     const data = await res.json();
-    set({music: data});
+    set({music: data.data});
+  },
+  deleteMusic: async (id) => {
+    const res = await fetch(`/api/music/${id}`, {
+        method: "DELETE",
+    });
+
+    const data = await res.json();
+
+    if(!data.success) {
+        return {success: false, message: data.message};
+    }
+
+    set(state => ({music: state.music.filter((music) => music._id !== id)}));
+
+    return {success: true, message: data.message};
   }
 }));

@@ -3,7 +3,7 @@ import { Container, VStack, Heading, Box, Input, Button } from "@chakra-ui/react
 import {useMusicStore} from "../store/music"
 import { useToast } from '@chakra-ui/react'
 
-const CreateMusic = () => {
+const CreateMusicPage = () => {
     const [newMusic, setNewMusic] = useState({
         name: "",
         artist: "",
@@ -19,28 +19,24 @@ const CreateMusic = () => {
     const {createMusic} = useMusicStore()
 
     const HandleAddMusic = async () => {
-        const {success, message} = await createMusic(newMusic);
-        
-        if(success)
-        {
+        const { success, message } = await createMusic(newMusic);
+       
+        if(!success) {
             toast({
-                title: 'Account created.',
-                description: "We've created your account for you.",
-                status: 'success',
-                duration: 9000,
-                isClosable: true,
-              })
-        }
-        else
-        {
-            toast({
-                title: 'Please fill all fields.',
-                icon: '👽',
-                description: "Music resource creation failed.",
+                title: 'Error',
+                description: message,
                 status: 'error',
                 duration: 9000,
                 isClosable: true,
-              })
+            });
+        } else {
+            toast({
+                title: 'Success',
+                description: message,
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+            });
         }
 
         setNewMusic({
@@ -52,7 +48,6 @@ const CreateMusic = () => {
             format: "",
             image: "",
         });
-
     }
 
     
@@ -118,4 +113,4 @@ const CreateMusic = () => {
 }
 
 
-export default CreateMusic
+export default CreateMusicPage

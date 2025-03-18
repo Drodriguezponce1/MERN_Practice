@@ -1,9 +1,39 @@
-import { Box, Heading, Image, useColorModeValue } from '@chakra-ui/react'
+import { Box, Heading, Image, useColorModeValue, Text, HStack, IconButton, useToast } from '@chakra-ui/react'
+import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 import React from 'react'
+import { useMusicStore } from '../store/music';
 
 export const MusicCard = ({ music }) => {
 
     const textColor = useColorModeValue("gray.600");
+    const bg = useColorModeValue("white", "gray.800");
+
+    const {deleteMusic} = useMusicStore();
+
+    const toast = useToast();
+
+    const handleDeleteProduct = async (id) => {
+        const { success, message } = await deleteMusic(id);
+        
+        if(!success) {
+            toast({
+                title: 'Error',
+                description: message,
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+            });
+        } else {
+            toast({
+                title: 'Success',
+                description: message,
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+            });
+        }
+    }
+
     return (
         <Box
             shadow='lg'
@@ -16,7 +46,7 @@ export const MusicCard = ({ music }) => {
             <Image src={music.image} alt={music.name} h={48} w='full' objectFit={'cover'} />
 
             <Box p={4}>
-                <Heading as={"h3"} size={"md"} fontSize={'x1'} color={textColor}>
+                <Heading as={"h3"} size={"md"} fontSize={'xl'} color={textColor}>
                     {music.name}
                 </Heading>
 
@@ -42,7 +72,7 @@ export const MusicCard = ({ music }) => {
 
                 <HStack spacing={2}>
 					<IconButton icon={<EditIcon />} colorScheme='blue' />
-					<IconButton icon={<DeleteIcon />} colorScheme='red'/>
+					<IconButton icon={<DeleteIcon />} onClick={() => handleDeleteProduct(music._id)}colorScheme='red'/>
 				</HStack>
 
             </Box>
@@ -50,3 +80,5 @@ export const MusicCard = ({ music }) => {
         </Box>
     )
 }
+
+export default MusicCard
