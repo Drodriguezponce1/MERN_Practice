@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container, VStack, Heading, Box, useColorModeValue, Select, Input } from "@chakra-ui/react"
 
-const CreatePage = () => {
+const CreateMusic = () => {
     const [newProduct, setNewProduct] = useState({
         name: "",
         price: "",
@@ -112,4 +112,4 @@ const collection = [
     { label: "Video Games" },
 ]
 
-export default CreatePage
+export default CreateMusic

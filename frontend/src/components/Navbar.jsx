@@ -3,6 +3,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { RiMenuAddFill } from "react-icons/ri";
 import { IoMdBookmarks } from "react-icons/io";
+import { TbCards } from "react-icons/tb";
+import { TfiGame } from "react-icons/tfi";
+
 
 
 const Navbar = () => {
@@ -29,8 +32,8 @@ const Navbar = () => {
                 </Text>
 
                 <HStack spacing={2} alignItems={"center"}>
-                    
-                    <Link to={"/create"}>
+
+                    <Link to={"/createMusic"}>
                         <Button>
                             <RiMenuAddFill fontSize={20}/>
                         </Button>
@@ -39,6 +42,18 @@ const Navbar = () => {
                     <Link to={"/createManga"}>
                         <Button>
                             <IoMdBookmarks  fontSize={20}/>
+                        </Button>
+                    </Link>
+
+                    <Link to={"/createTradingCards"}>
+                        <Button>
+                            <TbCards  fontSize={20}/>
+                        </Button>
+                    </Link>
+
+                    <Link to={"/createVideoGame"}>
+                        <Button>
+                            <TfiGame   fontSize={20}/>
                         </Button>
                     </Link>
                 </HStack>
