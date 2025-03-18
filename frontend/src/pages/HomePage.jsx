@@ -24,7 +24,7 @@ const HomePage = () => {
           bgClip={"text"}
           textAlign={"center"}
         >
-          Current Collection
+          Current Music Collection
         </Text>
         <Text
           fontSize={"30"}

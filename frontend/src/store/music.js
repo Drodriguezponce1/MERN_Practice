@@ -42,5 +42,26 @@ export const useMusicStore = create((set) => ({
     set(state => ({music: state.music.filter((music) => music._id !== id)}));
 
     return {success: true, message: data.message};
+  },
+  updateMusic: async (id, updatedMusic) => {
+    const res = await fetch(`/api/music/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedMusic),
+    });
+
+    const data = await res.json();
+
+    if(!data.success) {
+        return {success: false, message: data.message};
+    }
+
+    set(state => ({
+      music: state.music.map(music => music._id === id ? data.data : music)
+    }));
+
+    return {success: true, message: `Successfully changed ${data.data.name} resource`};
   }
 }));
