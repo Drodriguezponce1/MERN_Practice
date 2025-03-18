@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Container, VStack, Heading, Box, useColorModeValue, Input, Button } from "@chakra-ui/react"
+import { Container, VStack, Heading, Box, Input, Button } from "@chakra-ui/react"
+import {useMusicStore} from "../store/music"
+import { useToast } from '@chakra-ui/react'
 
 const CreateMusic = () => {
     const [newMusic, setNewMusic] = useState({
@@ -12,9 +14,48 @@ const CreateMusic = () => {
         image: "",
     });
 
+    const toast = useToast()
+
+    const {createMusic} = useMusicStore()
+
     const HandleAddMusic = async () => {
-        console.log(newMusic);
+        const {success, message} = await createMusic(newMusic);
+        
+        if(success)
+        {
+            toast({
+                title: 'Account created.',
+                description: "We've created your account for you.",
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+              })
+        }
+        else
+        {
+            toast({
+                title: 'Please fill all fields.',
+                icon: '👽',
+                description: "Music resource creation failed.",
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+              })
+        }
+
+        setNewMusic({
+            name: "",
+            artist: "",
+            genre: "",
+            year: "",
+            price: "",
+            format: "",
+            image: "",
+        });
+
     }
+
+    
 
     return (
         <Container maxW="container.sm">
