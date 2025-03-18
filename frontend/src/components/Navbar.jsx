@@ -20,45 +20,56 @@ const Navbar = () => {
                     sm: "row",
                 }}
             >
-                <Text
-                    fontSize={{ base: "22", sm: "28" }}
-                    fontWeight={"bold"}
-                    textTransform={"uppercase"}
-                    textAlign={"center"}
-                    bgGradient={"linear(to-r, yellow.400, red.500)"}
-                    bgClip={"text"}
-                >
-                    <Link to={"/"}>Danny's Collection 💥</Link>
-                </Text>
+                <HStack spacing={2} alignItems={"center"}>
+                    <Text
+                        fontSize={{ base: "22", sm: "28" }}
+                        fontWeight={"bold"}
+                        textTransform={"uppercase"}
+                        textAlign={"center"}
+                        bgGradient={"linear(to-r, yellow.400, red.500)"}
+                        bgClip={"text"}
+                    >
+                        <Link to={"/"}>Danny's Collection</Link>
+                    </Text>
+                    <Text
+                        fontSize={{ base: "22", sm: "28" }}
+                        fontWeight={"bold"}
+                        textTransform={"uppercase"}
+                        textAlign={"center"}
+                        
+                    >
+                        <Link to={"/"}>💥</Link>
+                    </Text>
+                </HStack>
 
                 <HStack spacing={2} alignItems={"center"}>
 
                     <Link to={"/createMusic"}>
                         <Button>
-                            <RiMenuAddFill fontSize={20}/>
+                            <RiMenuAddFill fontSize={20} />
                         </Button>
                     </Link>
 
                     <Link to={"/createManga"}>
                         <Button>
-                            <IoMdBookmarks  fontSize={20}/>
+                            <IoMdBookmarks fontSize={20} />
                         </Button>
                     </Link>
 
                     <Link to={"/createTradingCards"}>
                         <Button>
-                            <TbCards  fontSize={20}/>
+                            <TbCards fontSize={20} />
                         </Button>
                     </Link>
 
                     <Link to={"/createVideoGame"}>
                         <Button>
-                            <TfiGame   fontSize={20}/>
+                            <TfiGame fontSize={20} />
                         </Button>
                     </Link>
                 </HStack>
 
-                
+
             </Flex>
         </Container>
     );

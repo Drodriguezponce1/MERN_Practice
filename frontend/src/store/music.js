@@ -22,5 +22,10 @@ export const useMusicStore = create((set) => ({
 
     return {success: true, message: "Music resource created"};
     
+  },
+  fetchMusic: async () => {
+    const res = await fetch("/api/music");
+    const data = await res.json();
+    set({music: data});
   }
 }));
