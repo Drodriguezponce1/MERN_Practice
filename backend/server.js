@@ -3,6 +3,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
+import path from "path";
 
 //importing routes
 import musicRoutes from './routes/music.route.js';
@@ -11,6 +12,7 @@ import tradingCardRoutes from './routes/tradingcards.route.js';
 import videoGameRoutes from './routes/videogames.route.js';
 
 //setups
+const __dirname = path.resolve();
 
 dotenv.config(); // this will load the .env file and make the variables available to the process.env object
 
@@ -55,3 +57,8 @@ app.use('/api/tradingcard', tradingCardRoutes);
 // VIDEO GAMES RELATED
 app.use('/api/videogame', videoGameRoutes);
 
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '/frontend/dist')));
+
+    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html')));
+}
