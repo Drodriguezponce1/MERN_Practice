@@ -28,6 +28,8 @@ export const useMangaStore = create((set) => ({
         const data = await res.json();
         set({manga: data.data});
       },
+      
+      
 
 
 }));

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useMusicStore } from "../store/music"
 import { useMangaStore } from "../store/manga"
 import { MusicCard } from "../components/MusicCard"
+import {MangaCard} from "../components/MangaCard"
 
 const HomePage = () => {
 
@@ -25,38 +26,79 @@ const HomePage = () => {
 
   return (
     <Container maxW={"container.xl"} px={12}>
-      <HStack spacing={1} justifyContent={"center"} py={8}>
-        <Text
-          fontSize={"30"}
-          fontWeight={"bold"}
-          bgGradient={"linear(to-r, red.400, yellow.500)"}
-          bgClip={"text"}
-          textAlign={"center"}
-        >
-          Current Music Collection
-        </Text>
-        <Text
-          fontSize={"30"}
-          fontWeight={"bold"}
-          textAlign={"left"}>🦂</Text>
-      </HStack>
 
-      <SimpleGrid
-        columns={{
-          base: 1,
-          md: 2,
-          lg: 3,
-        }}
-        spacing={10}
-        w={"full"}
-      >
+      {Array.isArray(music) && music.length != 0 && (
+        <>
+          <HStack spacing={1} justifyContent={"center"} py={8}>
+            <Text
+              fontSize={"30"}
+              fontWeight={"bold"}
+              bgGradient={"linear(to-r, red.400, yellow.500)"}
+              bgClip={"text"}
+              textAlign={"center"}
+            >
+              Current Music Collection
+            </Text>
+            <Text
+              fontSize={"30"}
+              fontWeight={"bold"}
+              textAlign={"left"}>🦂</Text>
+          </HStack>
 
-        {Array.isArray(music) && music.map((music) => (
-          <MusicCard key={music._id} music={music} />
-        ))}
+          <SimpleGrid
+            columns={{
+              base: 1,
+              md: 2,
+              lg: 3,
+            }}
+            spacing={10}
+            w={"full"}
+          >
 
-      </SimpleGrid>
+            {Array.isArray(music) && music.map((music) => (
+              <MusicCard key={music._id} music={music} />
+            ))}
 
+          </SimpleGrid>
+        </>
+      )}
+
+      {Array.isArray(manga) && manga.length != 0 && (
+        <>
+          <HStack spacing={1} justifyContent={"center"} py={8}>
+            <Text
+              fontSize={"30"}
+              fontWeight={"bold"}
+              bgGradient={"linear(to-r, blue.400, green.500)"}
+              bgClip={"text"}
+              textAlign={"center"}
+            >
+              Current Manga Collection
+            </Text>
+            <Text
+              fontSize={"30"}
+              fontWeight={"bold"}
+              textAlign={"left"}>📚</Text>
+          </HStack>
+
+          <SimpleGrid
+            columns={{
+              base: 1,
+              md: 2,
+              lg: 3,
+            }}
+            spacing={10}
+            w={"full"}
+          >
+
+            {Array.isArray(manga) && manga.map((manga) => (
+              <MangaCard key={manga._id} manga={manga} />
+            ))}
+            <Text>{manga[1].name}</Text>
+
+          </SimpleGrid>
+        </>
+      )}
 
 
       <VStack spacing={1} justifyContent={"center"} py={2}>
