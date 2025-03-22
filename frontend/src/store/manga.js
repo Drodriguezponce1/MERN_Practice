@@ -23,6 +23,11 @@ export const useMangaStore = create((set) => ({
         return {success: true, message: "Manga resource created"};
         
       },
+      fetchManga: async () => {
+        const res = await fetch("/api/manga");
+        const data = await res.json();
+        set({manga: data.data});
+      },
 
 
 }));

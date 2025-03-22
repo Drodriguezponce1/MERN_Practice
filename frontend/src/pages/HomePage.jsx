@@ -2,17 +2,26 @@ import { Container, HStack, Text, VStack, SimpleGrid } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useMusicStore } from "../store/music"
+import { useMangaStore } from "../store/manga"
 import { MusicCard } from "../components/MusicCard"
 
 const HomePage = () => {
 
   const { fetchMusic, music } = useMusicStore()
 
+  const { fetchManga, manga } = useMangaStore()
+
   useEffect(() => {
     fetchMusic();
   }, [fetchMusic]);
 
   console.log("music", music);
+
+  useEffect(() => {
+    fetchManga();
+  }, [fetchManga]);
+
+  console.log("manga", manga);
 
   return (
     <Container maxW={"container.xl"} px={12}>
@@ -49,10 +58,10 @@ const HomePage = () => {
       </SimpleGrid>
 
 
-      
-        <VStack spacing={1} justifyContent={"center"} py={2}>
 
-          {/*{Array.isArray(music) && music.length === 0 && (*/}
+      <VStack spacing={1} justifyContent={"center"} py={2}>
+
+        {Array.isArray(music) && music.length === 0 && Array.isArray(manga) && manga.length === 0 && (
           <Text
             fontSize={"25"}
             fontWeight={"bold"}
@@ -60,10 +69,12 @@ const HomePage = () => {
           >
             No Collection was found 😥
           </Text>
-          {/*)}*/}
+        )}
+
+        {Array.isArray(music) && music.length === 0 && (
           <Link to={"/createMusic"}>
-          
-          <Text
+
+            <Text
               as={"span"}
               fontSize={"15"}
               fontWeight={"bold"}
@@ -74,10 +85,12 @@ const HomePage = () => {
               Create Music Resource 🎶
             </Text>
           </Link>
+        )}
 
+        {Array.isArray(manga) && manga.length === 0 && (
           <Link to={"/createManga"}>
-        
-          <Text
+
+            <Text
               as={"span"}
               fontSize={"15"}
               fontWeight={"bold"}
@@ -88,35 +101,36 @@ const HomePage = () => {
               Create Manga Resource 📚
             </Text>
           </Link>
+        )}
 
-          <Link to={"/createTradingCards"}>
+        <Link to={"/createTradingCards"}>
           <Text
-              as={"span"}
-              fontSize={"15"}
-              fontWeight={"bold"}
-              textAlign={"center"}
-              color={"blue.500"}
-              _hover={{ textDecoration: "underline" }}
-            >
-              Create Trading Card Resource 🎴
-            </Text>
-          </Link>
+            as={"span"}
+            fontSize={"15"}
+            fontWeight={"bold"}
+            textAlign={"center"}
+            color={"blue.500"}
+            _hover={{ textDecoration: "underline" }}
+          >
+            Create Trading Card Resource 🎴
+          </Text>
+        </Link>
 
-          <Link to={"/createVideoGame"}>
-            <Text
-              as={"span"}
-              fontSize={"15"}
-              fontWeight={"bold"}
-              textAlign={"center"}
-              color={"blue.500"}
-              _hover={{ textDecoration: "underline" }}
-            >
-              Create Video Game Resource 🎮
-            </Text>
-          </Link>
+        <Link to={"/createVideoGame"}>
+          <Text
+            as={"span"}
+            fontSize={"15"}
+            fontWeight={"bold"}
+            textAlign={"center"}
+            color={"blue.500"}
+            _hover={{ textDecoration: "underline" }}
+          >
+            Create Video Game Resource 🎮
+          </Text>
+        </Link>
 
-        </VStack>
-      
+      </VStack>
+
     </Container>
   )
 }
