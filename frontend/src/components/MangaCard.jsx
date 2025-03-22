@@ -42,7 +42,7 @@ export const MangaCard = ({ manga }) => {
 				</Text>
 
 				<Text fontWeight='bold' fontSize='xl' color={textColor} mb={4}>
-					{manga.pages}
+					{manga.pages} pages
 				</Text>
 
 				<Text fontWeight='bold' fontSize='xl' color={textColor} mb={4}>
