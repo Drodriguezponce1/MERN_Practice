@@ -13,7 +13,7 @@ export const useMangaStore = create((set) => ({
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(newMusic),
+            body: JSON.stringify(newManga),
         });
     
         const data = await res.json();
