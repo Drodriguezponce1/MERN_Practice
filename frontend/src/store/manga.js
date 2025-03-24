@@ -28,7 +28,42 @@ export const useMangaStore = create((set) => ({
         const data = await res.json();
         set({manga: data.data});
       },
-      
+      deleteManga: async (id) => {
+        const res = await fetch(`/api/manga/${id}`, {
+            method: "DELETE",
+        });
+    
+        const data = await res.json();
+    
+        if(!data.success) {
+            return {success: false, message: data.message};
+        }
+    
+        set(state => ({manga: state.manga.filter((manga) => manga._id !== id)}));
+    
+        return {success: true, message: data.message};
+      },
+      updateManga: async (id, updatedManga) => {
+        const res = await fetch(`/api/manga/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedManga),
+        });
+    
+        const data = await res.json();
+    
+        if(!data.success) {
+            return {success: false, message: data.message};
+        }
+    
+        set(state => ({
+          manga: state.manga.map(manga => manga._id === id ? data.data : manga)
+        }));
+    
+        return {success: true, message: `Successfully changed ${data.data.name} resource`};
+      }
       
 
 
